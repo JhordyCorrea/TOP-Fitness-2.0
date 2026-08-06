@@ -18,7 +18,7 @@ jobs:
           java-version: '17'
 
       - name: Descomprimir proyecto
-        run: unzip -q TOP_Fitness_2.0_JStudio.zip -d project
+        run: unzip -q TOP_Fitness_JStudio_actualizado.zip -d project
 
       - name: Instalar Gradle
         uses: gradle/actions/setup-gradle@v4
