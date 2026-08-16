@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <title>TOP Fitness</title>
+  <script src="supabase-config.js"></script>
+  <style>
+    :root{--black:#080808;--gold:#c9a84c;--white:#f7f7f5}
+    *{box-sizing:border-box}body{margin:0;background:var(--black);color:var(--white);font-family:Arial,sans-serif;min-height:100vh}
+    .wrap{max-width:900px;margin:auto;padding:28px 18px}.brand{font-size:34px;font-weight:900;letter-spacing:3px}.brand span{color:var(--gold)}
+    .card{margin-top:24px;padding:24px;border:1px solid #2b2b2b;border-radius:16px;background:#111;text-align:center}
+    .status{margin-top:18px;font-size:14px;color:#aaa}.ok{color:#8fd18f}.error{color:#e28d8d}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand"><span>TOP</span> FITNESS</div>
+    <section class="card">
+      <h1>TOP Fitness</h1>
+      <p>Aplicación Android conectada al backend oficial de TOP Fitness.</p>
+      <div id="status" class="status">Verificando conexión…</div>
+    </section>
+  </main>
+  <script>
+    (async()=>{
+      const el=document.getElementById('status');
+      try{
+        const r=await window.TOP_FITNESS_BACKEND.healthCheck();
+        el.textContent=r.ok?'Backend Supabase conectado':'Backend disponible, requiere autenticación';
+        el.className='status '+(r.ok?'ok':'error');
+      }catch(e){el.textContent='Conexión pendiente';el.className='status error';}
+    })();
+  </script>
+</body>
+</html>
