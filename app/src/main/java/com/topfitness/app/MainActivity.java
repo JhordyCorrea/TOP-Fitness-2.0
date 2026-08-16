@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -50,6 +49,20 @@ public class MainActivity extends Activity {
         });
         setContentView(webView);
         webView.loadUrl("file:///android_asset/index.html");
+        handleAuthIntent(getIntent());
+    }
+
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleAuthIntent(intent);
+    }
+
+    private void handleAuthIntent(Intent intent) {
+        Uri uri = intent != null ? intent.getData() : null;
+        if (uri == null || !"topfitness".equals(uri.getScheme()) || !"auth".equals(uri.getHost())) return;
+        final String callback = uri.toString().replace("\\", "\\\\").replace("'", "\\'");
+        webView.postDelayed(() -> webView.evaluateJavascript("window.handleTopFitnessAuth && window.handleTopFitnessAuth('" + callback + "')", null), 350);
     }
 
     private void openChooser() {
