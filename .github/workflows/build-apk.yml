@@ -1,36 +1,33 @@
-name: Build TOP Fitness 2.0
+name: Build EMMA APK
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Descargar proyecto
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Configurar Java
+      - name: Set up Java 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-
-      - name: Descomprimir proyecto
-        run: unzip -q TOP_Fitness_JStudio_actualizado.zip -d project
-
-      - name: Instalar Gradle
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install Android SDK 34
+        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
+      - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.2'
-
-      - name: Compilar APK
-        working-directory: project/topj
-        run: gradle assembleDebug --no-daemon
-
-      - name: Guardar APK
+          gradle-version: '8.2.2'
+      - name: Build debug APK
+        run: gradle :app:assembleDebug --no-daemon
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: TOP-Fitness-2.0-APK
-          path: project/topj/app/build/outputs/apk/debug/*.apk
+          name: EMMA-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
