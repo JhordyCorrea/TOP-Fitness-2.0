@@ -2,16 +2,16 @@
 
 **Educación · Movimiento · Musculación · Aptitud física**
 
-Clean Android/Gradle reconstruction of the former TOP Fitness project.
+Aplicación Android para educación física orientada a la salud, fitness, musculación, valoración, nutrición, planificación y rendimiento físico.
+
+## Identidad
+
+EMMA conserva la arquitectura funcional desarrollada originalmente para TOP Fitness, pero adopta una nueva identidad de producto y código limpia, independiente de JStudio.
 
 ## Backend
-Supabase project: `oxscuoilizohrxiuhwpz` in `sa-east-1`.
 
-## Build
-JDK 17 + Android SDK 34 + Gradle 8.2.2.
+El proyecto utiliza Supabase como backend para autenticación, datos y servicios de la plataforma.
 
-`gradle :app:assembleDebug --no-daemon`
+## Compilación
 
-APK: `app/build/outputs/apk/debug/app-debug.apk`
-
-The Supabase database remains the backend and its existing exercise, training, measurement, goal, subscription, payment and security structures are preserved.
+La compilación Android se automatiza mediante GitHub Actions y genera el APK de depuración como artefacto `EMMA-debug-apk`.
