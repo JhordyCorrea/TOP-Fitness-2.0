@@ -2,9 +2,9 @@
 <resources>
     <style name="Theme.EMMA" parent="android:style/Theme.Material.Light.NoActionBar">
         <item name="android:fontFamily">sans</item>
-        <item name="android:colorAccent">#C9A227</item>
-        <item name="android:navigationBarColor">#0B0B0D</item>
-        <item name="android:statusBarColor">#0B0B0D</item>
+        <item name="android:colorAccent">@color/emma_gold</item>
+        <item name="android:navigationBarColor">@color/emma_black</item>
+        <item name="android:statusBarColor">@color/emma_black</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
